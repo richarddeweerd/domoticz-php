@@ -102,6 +102,12 @@ function telegram($msg,$silent=true,$to=1){
 	elseif($to==3){ios($msg);global $actions;$actions=$actions+1;}
 
 }
+
+
+function notify($sub, $msg){
+		file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=sendnotification&subject='.$sub.'&body='.$msg.'&subsystem=http');    
+}
+
 function lg($msg){
 	$time    = microtime(true);
 	$dFormat = "Y-m-d H:i:s";
