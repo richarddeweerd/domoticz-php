@@ -1,4 +1,5 @@
 <?php
-if($status=="On"){
-  notify("Help","Overloop");
+if($status=="Open"){
+  setrgb("sBed_RGBW","00ff22"){
+  notify("Help","RGBW");
 }

@@ -44,6 +44,13 @@ if(apcu_fetch('cron5')<time-4){
 	}
 	include('/opt/jarvis/php/_cron5.php');
 }
+function setrgb($name,$rgb,$comment=''){
+	$msg = 'SetRGB '.$name.' => '.$rgb;
+	if(!empty($comment)) $msg.=' => '.$comment;
+	lg($msg);
+	if(apcu_exists('i'.$name))file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=setcolbrightnessvalue&idx='.apcu_fetch('i'.$name).'&hex='.$rgb);
+}
+
 function sw($name,$action='Toggle',$comment=''){
 	if(is_array($name)){
 		foreach($name as $i){
@@ -105,15 +112,16 @@ function telegram($msg,$silent=true,$to=1){
 
 
 function notify($sub, $msg){
-		file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=sendnotification&subject='.$sub.'&body='.$msg.'&subsystem=http');    
+		file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=sendnotification&subject='.$sub.'&body='.$msg.'&subsystem=http');
 }
 
 function lg($msg){
+	file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=addlogmessage&message='.$msg);
 	$time    = microtime(true);
 	$dFormat = "Y-m-d H:i:s";
 	$mSecs   =  $time - floor($time);
 	$mSecs   =  substr(number_format($mSecs,3),1);
-	$fp = fopen('/var/log/floorplanlog.log',"a+");
+	$fp = fopen('/var/log/domoticz.log',"a+");
 	fwrite($fp, sprintf("%s%s %s \n", date($dFormat), $mSecs, $msg));
 	fclose($fp);
 }

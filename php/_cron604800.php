@@ -1,5 +1,6 @@
 <?php
 $domoticz=json_decode(file_get_contents('http://192.168.1.200:8080/json.htm?type=devices&used=true'),true);
+
 if($domoticz){
 	foreach($domoticz['result'] as $dom){
 		$name=$dom['Name'];
