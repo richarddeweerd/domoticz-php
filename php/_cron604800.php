@@ -9,20 +9,24 @@ if($domoticz){
     else {
       $switchtype='none';
     }
-		apcu_store('t'.$name,strtotime($dom['LastUpdate']));
-		apcu_store('i'.$name,$dom['idx']);
+		//apcu_store('t'.$name,strtotime($dom['LastUpdate']));
+		//apcu_store('i'.$name,$dom['idx']);
 		if($dom['Type']=='Temp'){
-      apcu_store('s'.$name,str_replace(' C','',$dom['Data']));
+      //apcu_store('s'.$name,str_replace(' C','',$dom['Data']));
     }
     elseif($dom['TypeImg']=='current'){
-      apcu_store('s'.$name,str_replace(' Watt','',$dom['Usage']));
+      //apcu_store('s'.$name,str_replace(' Watt','',$dom['Usage']));
     }
-		elseif($switchtype=='Dimmer'){
-			if($dom['Data']=='Off')apcu_store('s'.$name,'Off');
-			else apcu_store('s'.$name,filter_var($dom['Data'],FILTER_SANITIZE_NUMBER_INT));
+		elseif($switchtype=='Dimmer') {
+			if($dom['Data']=='Off'){
+        //apcu_store('s'.$name,'Off');
+      }
+			else {
+        //apcu_store('s'.$name,filter_var($dom['Data'],FILTER_SANITIZE_NUMBER_INT));
+      }
 		}
 		else {
-      apcu_store('s'.$name,$dom['Data']);
+      //apcu_store('s'.$name,$dom['Data']);
     }
-	}
+  }
 }
