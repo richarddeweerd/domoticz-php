@@ -121,7 +121,7 @@ function lg($msg){
 	$dFormat = "Y-m-d H:i:s";
 	$mSecs   =  $time - floor($time);
 	$mSecs   =  substr(number_format($mSecs,3),1);
-	$fp = fopen('/var/log/domoticz.log',"a+");
+	$fp = fopen('/opt/jarvis/domoticz.log',"a+");
 	fwrite($fp, sprintf("%s%s %s \n", date($dFormat), $mSecs, $msg));
 	fclose($fp);
 }
