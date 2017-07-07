@@ -44,11 +44,11 @@ if(apcu_fetch('cron5')<time-4){
 	}
 	include('/opt/jarvis/php/_cron5.php');
 }
-function setrgb($name,$rgb,$comment=''){
+function sethue($name,$hue,$bright,$comment=''){
 	$msg = 'SetRGB '.$name.' => '.$rgb;
 	if(!empty($comment)) $msg.=' => '.$comment;
 	lg($msg);
-	if(apcu_exists('i'.$name))file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=setcolbrightnessvalue&idx='.apcu_fetch('i'.$name).'&hex='.$rgb);
+	if(apcu_exists('i'.$name))file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=setcolbrightnessvalue&idx='.apcu_fetch('i'.$name).'&hue='.$hue,'&brightness='.$bright.'&iswhite=false');
 }
 
 function sw($name,$action='Toggle',$comment=''){

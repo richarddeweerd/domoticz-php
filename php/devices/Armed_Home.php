@@ -1,5 +1,5 @@
 <?php
 if($status=="Open"){
-  setrgb("sBed_RGBW","00ff22"){
-  notify("Help","RGBW");
+  sethue("sBed_RGBW",220,40);
+  notify("Alarm","Armed Home");
 }
