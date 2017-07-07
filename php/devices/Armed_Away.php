@@ -1,5 +1,5 @@
 <?php
 if($status=="Open"){
-  sethue("sBed_RGBW",220,40);
-  notify("Alarm","Armed_Away");
+  sethue("sBed_RGBW",220,0);
+  notify("Alarm","Armed Away");
 }
