@@ -1,9 +1,7 @@
 <?php
 if($status=="Open"){
-  sethue("sBed_RGBW",220,40);
+  sethue("Bed_RGBW",220,40);
   notify("Alarm","Armed Home");
-}
-
-if($status=="Closed"){
-  sethue("sBed_RGBW",128,40);
+} else if ($status=="Closed"){
+  sethue("Bed_RGBW",128,40);
 }
