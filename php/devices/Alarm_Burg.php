@@ -5,5 +5,5 @@ if($status=="Open"){
 }
 
 if($status=="Closed"){
-  sethue("sBed_RGBW",128,40);
+  sethue("sBed_RGBW",128,40,false);
 }
