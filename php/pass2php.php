@@ -55,9 +55,12 @@ function sethue($name,$hue,$bright,$iswhite,$comment=''){
 function setdimmer($name,$bright,$comment=''){
 	$msg = 'SetDimmer '.$name.' => '.$bright;
 	if(!empty($comment)) $msg.=' => '.$comment;
-	//$msg = 	'http://192.168.1.200:8080/json.htm?type=command&param=setcolbrightnessvalue&idx='.apcu_fetch('i'.$name).'&hue='.$hue,'&brightness='.$bright.'&iswhite=false';
-	lg($msg);
-	if(apcu_exists('i'.$name))file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=switchlight&idx='.apcu_fetch('i'.$name).'&switchcmd=Set%20Level&level='.$bright);
+	//$msg = 	'http://192.168.1.200:8080/json.htm?type=command&param=setcolbrightnessvalue&idx='.apcu_fetch('i'.$name).'&hue='.$hue,'&brightness='.$bright.'&iswhite=false';	
+	if(apcu_exists('i'.$name)){
+		lg($msg);
+		file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=switchlight&idx='.apcu_fetch('i'.$name).'&switchcmd=Set%20Level&level='.$bright);
+		lg($msg);
+	}
 }
 
 
