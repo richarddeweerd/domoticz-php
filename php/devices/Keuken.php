@@ -4,8 +4,8 @@ if($status!="Off"){
       sw("AppLamp_Keuken","On");
     } else {
       $s = explode(" ",$status);
-      if ($s[2] == "Level:") {
-        setdimmer("AppLamp_Keuken",$s[3]);
+      if ($s[1] == "Level:") {
+        setdimmer("AppLamp_Keuken",$s[2]);
       }  
     }
     
