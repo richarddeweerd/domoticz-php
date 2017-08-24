@@ -11,6 +11,8 @@ define('time',$_SERVER['REQUEST_TIME']);
 //$zoninkom=15;
 //$zonmedia=10;
 
+lg("Hallo");
+
 if($_SERVER['REQUEST_METHOD']=='POST'){
 	$device=$_POST['d'];
 	$status=$_POST['s'];
