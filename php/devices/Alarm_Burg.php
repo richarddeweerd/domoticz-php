@@ -1,6 +1,6 @@
 <?php
 if($status=="Open"){
-  sethue("sBed_RGBW",1,100);
+  sethue("sBed_RGBW",1,100,false);
   notify("Alarm","Inbraak Alarm");
 }
 
