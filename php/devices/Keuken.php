@@ -10,7 +10,7 @@ if($status!="Off"){
         if (((int)$s[2] >= (int)apcu_fetch('vvKeuken_Dimmer_High')-1)&&((int)$s[2] <= (int)apcu_fetch('vvKeuken_Dimmer_High')+1)){
 
         } elseif (((int)$s[2] >= (int)apcu_fetch('vvKeuken_Dimmer_Low')-1) && ((int)$s[2] <= (int)apcu_fetch('vvKeuken_Dimmer_Low')+1)){
-          
+
         } else {
           //Override
           apcu_store('OverrideKeukenDimmer',"True");
@@ -20,6 +20,6 @@ if($status!="Off"){
     
 
 }else{
-  //sw("AppLamp_Keuken","Off");
   apcu_store('OverrideKeukenDimmer',"False");
+  apcu_store('WakeupKeukenDimmer',"False");
 }
