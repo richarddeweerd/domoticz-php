@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		lg($device.' = '.$status);
 
 		if(apcu_fetch('t'.$device)<time)apcu_store('t'.$device,time);
-		if(in_array($device,array('Eettafel','Keuken','Woonkamer',))){
+		if(in_array($device,array('Eettafel','Keuken','Woonkamer'))){
 			if($status=='Off')apcu_store('s'.$device,'Off');
 			else apcu_store('s'.$device,filter_var($status,FILTER_SANITIZE_NUMBER_INT));
 		}else apcu_store('s'.$device,$status);
