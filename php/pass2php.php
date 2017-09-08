@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		lg($device.' = '.$status);
 
 		if(apcu_fetch('t'.$device)<time)apcu_store('t'.$device,time);
-		if(in_array($device,array('Eettafel','Keuken','Woonkamer'))){
+		if(in_array($device,array('Eettafel','Keuken','Woonkamer',))){
 			if($status=='Off')apcu_store('s'.$device,'Off');
 			else apcu_store('s'.$device,filter_var($status,FILTER_SANITIZE_NUMBER_INT));
 		}else apcu_store('s'.$device,$status);
@@ -44,6 +44,26 @@ if(apcu_fetch('cron5')<time-4){
 	}
 	include('/opt/jarvis/php/_cron5.php');
 }
+function sethue($name,$hue,$bright,$iswhite,$comment=''){
+	$msg = 'SetRGB '.$name.' => '.$hue.' | '.$bright;
+	if(!empty($comment)) $msg.=' => '.$comment;
+	//$msg = 	'http://192.168.1.200:8080/json.htm?type=command&param=setcolbrightnessvalue&idx='.apcu_fetch('i'.$name).'&hue='.$hue,'&brightness='.$bright.'&iswhite=false';
+	lg($msg);
+	if(apcu_exists('i'.$name))file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=setcolbrightnessvalue&idx='.apcu_fetch('i'.$name).'&hue='.$hue.'&brightness='.$bright.'&iswhite='.$iswhite);
+}
+
+function setdimmer($name,$bright,$comment=''){
+	$msg = 'SetDimmer '.$name.' => '.$bright;
+	if(!empty($comment)) $msg.=' => '.$comment;
+	//$msg = 	'http://192.168.1.200:8080/json.htm?type=command&param=setcolbrightnessvalue&idx='.apcu_fetch('i'.$name).'&hue='.$hue,'&brightness='.$bright.'&iswhite=false';	
+	lg($msg);
+	if(apcu_exists('i'.$name)){		
+		file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=switchlight&idx='.apcu_fetch('i'.$name).'&switchcmd=Set%20Level&level='.$bright);
+		lg($msg);
+	}
+}
+
+
 function sw($name,$action='Toggle',$comment=''){
 	if(is_array($name)){
 		foreach($name as $i){
@@ -105,15 +125,16 @@ function telegram($msg,$silent=true,$to=1){
 
 
 function notify($sub, $msg){
-		file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=sendnotification&subject='.$sub.'&body='.$msg.'&subsystem=http');    
+		file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=sendnotification&subject='.urlencode($sub).'&body='.urlencode($msg).'&subsystem=http');
 }
 
 function lg($msg){
+	file_get_contents('http://192.168.1.200:8080/json.htm?type=command&param=addlogmessage&message='.urlencode($msg));
 	$time    = microtime(true);
 	$dFormat = "Y-m-d H:i:s";
 	$mSecs   =  $time - floor($time);
 	$mSecs   =  substr(number_format($mSecs,3),1);
-	$fp = fopen('/var/log/floorplanlog.log',"a+");
+	$fp = fopen('/opt/jarvis/domoticz.log',"a+");
 	fwrite($fp, sprintf("%s%s %s \n", date($dFormat), $mSecs, $msg));
 	fclose($fp);
 }
