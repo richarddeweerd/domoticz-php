@@ -25,6 +25,14 @@ if($domoticz){
 			else {
         apcu_store('s'.$name,filter_var($dom['Data'],FILTER_SANITIZE_NUMBER_INT));
       }
+		}elseif($switchtype=='Selector') {
+			if($dom['Data']=='Off'){
+        apcu_store('s'.$name,'Off');
+      }
+			else {
+        $LevelNames = explode("|", $dom['LevelNames']);        
+        apcu_store('s'.$name,filter_var($LevelNames[((int)$dom['LevelInt'])/10]));
+      }
 		}
 		else {
       apcu_store('s'.$name,$dom['Data']);
