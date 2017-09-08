@@ -1,32 +1,21 @@
 <?php
-lg(apcu_fetch('sSet_Buitenlamp'));
-switch (apcu_fetch('sSet_Buitenlamp')) {
+switch (apcu_fetch('sSet_Keukendimmer')) {
     case "Manual":
         //Manual
         break;
-    case "Timer-On":
-        //Timer on
-        if (apcu_fetch('sTimer_Buitenlamp')=='On'){
-            sw("Buitenlamp","On");
-        } elseif (apcu_fetch('sTimer_Buitenlamp')=='Off'){
-            sw("Buitenlamp","Off");
+    case "Auto":
+        //Auto
+        if (apcu_fetch('sKeuken_PIR')=='On'){
+            //Dimmer high
+            setdimmer("Keuken",apcu_fetch('vvKeuken_Dimmer_High'))
+        } elseif (apcu_fetch('sKeuken_PIR')=='Off'){
+            //Dimmer low
+            setdimmer("Keuken",apcu_fetch('vvKeuken_Dimmer_Low'))
         }        
         break;
-    case "Timer-Sensor":
-        //Timer Sensor
-        if ((apcu_fetch('sBuiten_PIR')=='On')&&(apcu_fetch('sTimer_Buitenlamp')=='On')){
-            sw("Buitenlamp","On");
-        } else {
-            sw("Buitenlamp","Off");
-        }        
-        break;
-    case "Sensor":
-        //Sensor
-        if (apcu_fetch('sBuiten_PIR')=='On'){
-            sw("Buitenlamp","On");
-        } elseif (apcu_fetch('sBuiten_PIR')=='Off'){
-            sw("Buitenlamp","Off");
-        }        
+    case "Override":
+        //Auto
+
         break;
 }
 ?>
