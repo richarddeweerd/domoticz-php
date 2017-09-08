@@ -50,6 +50,6 @@ if($domoticz){
 		$name=$dom['Name'];
 		apcu_store('vt'.$name,strtotime($dom['LastUpdate']));
 		apcu_store('vi'.$name,$dom['idx']);
-		apcu_store('vi'.$name,$dom['Value']);    
+		apcu_store('vv'.$name,$dom['Value']);    
   }
 }
