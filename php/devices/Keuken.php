@@ -9,7 +9,8 @@ if($status!="Off"){
       if ($s[1] == "Level:") {
         if (($s[2] != apcu_fetch('vvKeuken_Dimmer_High'))&& ($s[2] != apcu_fetch('vvKeuken_Dimmer_Low')) ){
           //Override
-          apcu_store('OverrideKeukenDimmer',"True");
+          //apcu_store('OverrideKeukenDimmer',"True");
+          apcu_store('OverrideKeukenDimmer',"False");
         }
       }  
     }
