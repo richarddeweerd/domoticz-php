@@ -4,8 +4,7 @@ if ($status == "On"){
     if ((int)apcu_fetch('sKeuken_Lux') <= 1){
         //Low light and PIR registers movement -> wakeup
         apcu_store('WakeupKeukenDimmer',"True");
-        //sw("AppLamp","On");
-        sethue("AppLamp",128,80,"false");
+        sethue("AppLamp",(int)apcu_fetch('vvApplamp_Color'),(int)apcu_fetch('vvApplamp_Level'),"false");
     }
 } elseif ($status == "Off"){
     apcu_store('WakeupKeukenDimmer',"False");
