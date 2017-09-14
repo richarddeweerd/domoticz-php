@@ -1,5 +1,4 @@
 <?php
-lg(apcu_fetch('sSet_Buitenlamp'));
 switch (apcu_fetch('sSet_Buitenlamp')) {
     case "Manual":
         //Manual
