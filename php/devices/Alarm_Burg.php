@@ -6,4 +6,5 @@ if($status=="Open"){
 
 if($status=="Closed"){
   sethue("sBed_RGBW",128,40,"false";
+  notify("Alarm","Inbraak Alarm uitgeschakeld");
 }
