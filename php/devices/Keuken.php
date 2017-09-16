@@ -16,7 +16,9 @@ if($status!="Off"){
           //Override
           if (apcu_fetch('KeukenOnTime'>= (time - 1) )){
             apcu_store('OverrideKeukenDimmer',"True");
-          }          
+          } else {
+            @include '/opt/jarvis/php/devices/_check_keukendimmer.php';
+          }
         }
       }  
     }
