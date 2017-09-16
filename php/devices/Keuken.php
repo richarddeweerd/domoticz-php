@@ -2,10 +2,10 @@
 
 if($status!="Off"){
     if ($status=="On"){
-
+      apcu_store('KeukenOnTime',time);
       @include '/opt/jarvis/php/devices/_check_keukendimmer.php';
     } else {
-      lg($status);
+      //lg($status);
       $s = explode(" ",$status);
       if ($s[1] == "Level:") {
         if (((int)$s[2] >= (int)apcu_fetch('vvKeuken_Dimmer_High')-1)&&((int)$s[2] <= (int)apcu_fetch('vvKeuken_Dimmer_High')+1)){
@@ -14,7 +14,9 @@ if($status!="Off"){
 
         } else {
           //Override
-          apcu_store('OverrideKeukenDimmer',"True");
+          if (apcu_fetch('KeukenOnTime'>= (time - 1) )){
+            apcu_store('OverrideKeukenDimmer',"True");
+          }          
         }
       }  
     }
