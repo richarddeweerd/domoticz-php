@@ -5,6 +5,7 @@ if($status!="Off"){
 
       @include '/opt/jarvis/php/devices/_check_keukendimmer.php';
     } else {
+      lg($status);
       $s = explode(" ",$status);
       if ($s[1] == "Level:") {
         if (((int)$s[2] >= (int)apcu_fetch('vvKeuken_Dimmer_High')-1)&&((int)$s[2] <= (int)apcu_fetch('vvKeuken_Dimmer_High')+1)){
@@ -21,5 +22,4 @@ if($status!="Off"){
 
 }else{
   apcu_store('OverrideKeukenDimmer',"False");
-  apcu_store('WakeupKeukenDimmer',"False");
 }
