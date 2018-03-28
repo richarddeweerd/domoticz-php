@@ -4,4 +4,5 @@ if($status=="Open"){
   notify("Alarm","Armed Home");
 } else if ($status=="Closed"){
   sethue("Bed_RGBW",128,40,"false");
+  notify("Alarm","Disarmed");
 }
